@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Chennai NET Academy — UGC NET June 2026</title>
+<meta name="description" content="Best UGC NET coaching for Paper I + Environmental Sciences. ₹29/month."/>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:system-ui,-apple-system,sans-serif;background:#f9fafb;color:#1e293b;}
+  input,button,textarea,select{font-family:inherit;}
+
+  /* ── NAV ── */
+  .nav{background:#4338ca;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;}
+  .nav-logo{color:#fff;font-weight:800;font-size:17px;display:flex;align-items:center;gap:8px;}
+  .nav-actions{display:flex;gap:10px;align-items:center;}
+
+  /* ── BUTTONS ── */
+  .btn{padding:10px 20px;border-radius:10px;border:none;cursor:pointer;font-weight:700;font-size:14px;transition:opacity .15s;}
+  .btn:hover{opacity:.88;}
+  .btn-primary{background:#4338ca;color:#fff;}
+  .btn-white{background:#fff;color:#4338ca;}
+  .btn-ghost{background:transparent;color:#a5b4fc;border:1.5px solid #4338ca;}
+  .btn-green{background:#059669;color:#fff;}
+  .btn-full{width:100%;padding:13px;font-size:15px;border-radius:10px;border:none;cursor:pointer;font-weight:700;}
+
+  /* ── CARDS ── */
+  .card{background:#fff;border-radius:16px;padding:24px;box-shadow:0 1px 6px rgba(0,0,0,.07);}
+
+  /* ── FORM ── */
+  .inp{width:100%;padding:11px 14px;border:1.5px solid #e5e7eb;border-radius:10px;font-size:15px;outline:none;background:#fff;color:#374151;margin-bottom:14px;}
+  .inp:focus{border-color:#4338ca;}
+  .lbl{display:block;font-size:13px;font-weight:600;color:#374151;margin-bottom:5px;}
+  .err{background:#fef2f2;border:1px solid #fecaca;color:#dc2626;padding:10px 14px;border-radius:8px;font-size:13px;margin-bottom:14px;}
+  .info{background:#eef2ff;border:1px solid #c7d2fe;color:#4338ca;padding:10px 14px;border-radius:8px;font-size:13px;margin-bottom:14px;}
+
+  /* ── SCREENS ── */
+  .screen{display:none;} .screen.active{display:block;}
+  .center-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:linear-gradient(135deg,#eef2ff,#f0fdf4);}
+
+  /* ── TABS ── */
+  .tabs{background:#fff;border-bottom:1px solid #e5e7eb;display:flex;padding:0 20px;overflow-x:auto;}
+  .tab{padding:13px 16px;background:transparent;border:none;cursor:pointer;font-weight:400;color:#9ca3af;border-bottom:3px solid transparent;font-size:14px;white-space:nowrap;}
+  .tab.active{font-weight:700;color:#4338ca;border-bottom-color:#4338ca;}
+
+  /* ── UNIT LIST ── */
+  .unit-row{background:#fff;border-radius:12px;padding:14px 18px;box-shadow:0 1px 4px #0001;display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px;}
+  .unit-badge{font-size:11px;font-weight:700;text-transform:uppercase;margin-right:8px;}
+
+  /* ── EXAM ── */
+  .qmap{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;}
+  .qnum{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;font-weight:700;border:1.5px solid #e5e7eb;background:#fff;color:#9ca3af;}
+  .qnum.current{background:#4338ca;color:#fff;border-color:#4338ca;}
+  .qnum.answered{background:#d1fae5;color:#059669;border-color:#6ee7b7;}
+  .option{padding:12px 16px;border:2px solid #e5e7eb;border-radius:10px;margin-bottom:10px;cursor:pointer;transition:all .1s;background:#fff;}
+  .option:hover{border-color:#a5b4fc;background:#eef2ff;}
+  .option.selected{border-color:#4338ca;background:#eef2ff;}
+
+  /* ── STATS ── */
+  .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:20px;}
+  .stat-card{border-radius:12px;padding:16px;text-align:center;}
+
+  /* ── HERO ── */
+  .hero{background:linear-gradient(135deg,#0f172a,#1e1b4b);color:#fff;padding:80px 24px;text-align:center;}
+  .hero h1{font-size:clamp(28px,5vw,52px);font-weight:900;line-height:1.1;margin-bottom:16px;background:linear-gradient(135deg,#fff,#a5b4fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:600px){
+    .nav{padding:12px 16px;}
+    .hero{padding:48px 16px;}
+    .card{padding:20px;}
+  }
+
+  /* ── SPINNER ── */
+  .spin{display:inline-block;width:18px;height:18px;border:2px solid #fff4;border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:6px;}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  /* ── TIMER ── */
+  #timer{font-weight:800;font-size:18px;font-variant-numeric:tabular-nums;}
+  #timer.red{color:#fca5a5;}
+</style>
+</head>
+<body>
+
+<!-- ═══ LANDING ══════════════════════════════════════════ -->
+<div id="s-landing" class="screen active">
+  <nav class="nav">
+    <div class="nav-logo">🎓 Chennai NET Academy</div>
+    <div class="nav-actions">
+      <button class="btn btn-ghost" onclick="show('s-login')">Login</button>
+      <button class="btn btn-white" onclick="show('s-register')">Register Free</button>
+    </div>
+  </nav>
+  <div class="hero">
+    <div style="display:inline-block;background:#1e1b4b;border:1px solid #4338ca;color:#a5b4fc;padding:4px 16px;border-radius:20px;font-size:12px;font-weight:700;margin-bottom:20px;">UGC NET June 2026</div>
+    <h1>Paper I + Environmental Sciences</h1>
+    <p style="color:#94a3b8;font-size:17px;margin-bottom:32px;line-height:1.6;max-width:560px;margin-left:auto;margin-right:auto;">111 topics · 8 question types · AI study notes · ₹29/month only</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <button class="btn btn-white" style="padding:13px 28px;font-size:15px;border-radius:12px;" onclick="show('s-register')">Start Free →</button>
+      <button class="btn btn-ghost" style="padding:13px 28px;font-size:15px;border-radius:12px;" onclick="show('s-login')">Login</button>
+    </div>
+  </div>
+  <!-- Features -->
+  <div style="max-width:860px;margin:0 auto;padding:48px 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px;">
+    <div class="card" style="text-align:center;">
+      <div style="font-size:32px;margin-bottom:10px;">📖</div>
+      <div style="font-weight:700;margin-bottom:4px;">10 Units</div>
+      <div style="color:#9ca3af;font-size:13px;">Paper I — all official topics</div>
+    </div>
+    <div class="card" style="text-align:center;">
+      <div style="font-size:32px;margin-bottom:10px;">🌿</div>
+      <div style="font-weight:700;margin-bottom:4px;">10 Units</div>
+      <div style="color:#9ca3af;font-size:13px;">Environmental Sciences</div>
+    </div>
+    <div class="card" style="text-align:center;">
+      <div style="font-size:32px;margin-bottom:10px;">❓</div>
+      <div style="font-weight:700;margin-bottom:4px;">8 Question Types</div>
+      <div style="color:#9ca3af;font-size:13px;">MCQ, Assertion-Reason & more</div>
+    </div>
+    <div class="card" style="text-align:center;">
+      <div style="font-size:32px;margin-bottom:10px;">💰</div>
+      <div style="font-weight:700;margin-bottom:4px;">₹29/month</div>
+      <div style="color:#9ca3af;font-size:13px;">Most affordable NET prep</div>
+    </div>
+  </div>
+  <!-- Pricing -->
+  <div style="max-width:600px;margin:0 auto;padding:0 24px 64px;display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+    <div class="card" style="border:1.5px solid #e5e7eb;">
+      <div style="font-weight:700;font-size:17px;margin-bottom:6px;">Free</div>
+      <div style="font-size:28px;font-weight:900;color:#9ca3af;margin-bottom:14px;">₹0</div>
+      <div style="color:#6b7280;font-size:13px;line-height:1.8;">✓ 2 mock tests<br/>✓ Preview questions<br/>✓ Basic dashboard</div>
+      <button class="btn-full btn-primary" style="margin-top:16px;" onclick="show('s-register')">Start Free</button>
+    </div>
+    <div class="card" style="border:2px solid #4338ca;position:relative;">
+      <div style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:#4338ca;color:#fff;font-size:11px;font-weight:700;padding:3px 12px;border-radius:20px;">POPULAR</div>
+      <div style="font-weight:700;font-size:17px;margin-bottom:6px;">Monthly</div>
+      <div style="font-size:28px;font-weight:900;color:#4338ca;margin-bottom:14px;">₹29<span style="font-size:13px;font-weight:400;color:#9ca3af;">/mo</span></div>
+      <div style="color:#374151;font-size:13px;line-height:1.8;">✓ Unlimited tests<br/>✓ All 111 topics<br/>✓ Full question bank<br/>✓ AI study notes</div>
+      <button class="btn-full btn-primary" style="margin-top:16px;" onclick="show('s-register')">Get Started</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SETUP (Supabase config) ══════════════════════════ -->
+<div id="s-setup" class="screen">
+  <div class="center-wrap">
+    <div class="card" style="max-width:460px;width:100%;">
+      <div style="text-align:center;margin-bottom:24px;">
+        <div style="width:56px;height:56px;background:#4338ca;border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:26px;">🎓</div>
+        <h2 style="font-size:20px;font-weight:800;">Chennai NET Academy</h2>
+        <p style="color:#9ca3af;font-size:13px;margin-top:6px;">Connect Supabase — one time setup</p>
+      </div>
+      <div id="setup-err" class="err" style="display:none;"></div>
+      <label class="lbl">Supabase Project URL</label>
+      <input class="inp" id="cfg-url" value="https://kvidlgtbfpzwrtcbfnhn.supabase.co" placeholder="https://xxxx.supabase.co"/>
+      <label class="lbl">Anon Public Key <span style="color:#9ca3af;font-weight:400;">(eyJ... ஆரம்பிக்கும்)</span></label>
+      <textarea class="inp" id="cfg-key" style="height:80px;resize:none;font-size:12px;" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."></textarea>
+      <button class="btn-full btn-primary" onclick="saveConfig()">Connect & Start →</button>
+      <p style="text-align:center;margin-top:12px;font-size:12px;color:#9ca3af;">Supabase → Settings → API → anon public key</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ LOGIN ═════════════════════════════════════════════ -->
+<div id="s-login" class="screen">
+  <div class="center-wrap">
+    <div class="card" style="max-width:420px;width:100%;">
+      <div style="text-align:center;margin-bottom:22px;">
+        <div style="font-size:36px;margin-bottom:8px;">🎓</div>
+        <h2 style="font-size:20px;font-weight:800;">Login</h2>
+        <p style="color:#9ca3af;font-size:13px;margin-top:4px;">Chennai NET Academy</p>
+      </div>
+      <div id="login-err" class="err" style="display:none;"></div>
+      <label class="lbl">Email</label>
+      <input class="inp" id="login-email" type="email" placeholder="your@email.com" onkeydown="if(event.key==='Enter')doLogin()"/>
+      <label class="lbl">Password</label>
+      <input class="inp" id="login-pw" type="password" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"/>
+      <button class="btn-full btn-primary" id="login-btn" onclick="doLogin()">Login →</button>
+      <p style="text-align:center;margin-top:14px;font-size:14px;color:#9ca3af;">
+        No account? <a href="#" onclick="show('s-register')" style="color:#4338ca;font-weight:600;">Register free</a>
+      </p>
+      <p style="text-align:center;margin-top:6px;">
+        <a href="#" onclick="show('s-landing')" style="font-size:13px;color:#9ca3af;">← Back</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ REGISTER ══════════════════════════════════════════ -->
+<div id="s-register" class="screen">
+  <div class="center-wrap">
+    <div class="card" style="max-width:440px;width:100%;">
+      <div style="text-align:center;margin-bottom:22px;">
+        <div style="font-size:36px;margin-bottom:8px;">🎓</div>
+        <h2 style="font-size:20px;font-weight:800;">Register Free</h2>
+        <p style="color:#9ca3af;font-size:13px;margin-top:4px;">2 free mock tests included</p>
+      </div>
+      <div id="reg-err" class="err" style="display:none;"></div>
+      <div id="reg-ok" class="info" style="display:none;"></div>
+      <label class="lbl">Full Name</label>
+      <input class="inp" id="reg-name" placeholder="Your full name"/>
+      <label class="lbl">Email</label>
+      <input class="inp" id="reg-email" type="email" placeholder="your@email.com"/>
+      <label class="lbl">Password</label>
+      <input class="inp" id="reg-pw" type="password" placeholder="Min. 6 characters"/>
+      <label class="lbl">Institution <span style="color:#9ca3af;font-weight:400;">(optional)</span></label>
+      <input class="inp" id="reg-inst" placeholder="College / University"/>
+      <label class="lbl">District <span style="color:#9ca3af;font-weight:400;">(optional)</span></label>
+      <input class="inp" id="reg-dist" placeholder="Chennai, Madurai..."/>
+      <button class="btn-full btn-primary" id="reg-btn" onclick="doRegister()">Register →</button>
+      <p style="text-align:center;margin-top:14px;font-size:14px;color:#9ca3af;">
+        Already registered? <a href="#" onclick="show('s-login')" style="color:#4338ca;font-weight:600;">Login</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ DASHBOARD ═════════════════════════════════════════ -->
+<div id="s-dashboard" class="screen">
+  <nav class="nav">
+    <div class="nav-logo">🎓 Chennai NET Academy</div>
+    <div class="nav-actions">
+      <span id="dash-plan" style="background:#fff;color:#4338ca;font-size:12px;font-weight:700;padding:4px 12px;border-radius:20px;"></span>
+      <span id="dash-email" style="color:#a5b4fc;font-size:13px;"></span>
+      <button class="btn btn-ghost" onclick="doLogout()">Logout</button>
+    </div>
+  </nav>
+  <div class="tabs">
+    <button class="tab active" onclick="dashTab('home',this)">Home</button>
+    <button class="tab" onclick="dashTab('p1',this)">Paper I</button>
+    <button class="tab" onclick="dashTab('p2',this)">Env Sciences</button>
+  </div>
+  <div style="max-width:760px;margin:0 auto;padding:20px;">
+
+    <!-- HOME TAB -->
+    <div id="tab-home">
+      <div style="background:linear-gradient(135deg,#4338ca,#6366f1);border-radius:16px;padding:24px;color:#fff;margin-bottom:20px;">
+        <p style="margin:0 0 4px;opacity:.8;font-size:13px;">UGC NET June 2026</p>
+        <h2 style="margin:0 0 8px;font-size:20px;font-weight:800;">Welcome! 👋</h2>
+        <p style="margin:0 0 16px;opacity:.9;font-size:14px;" id="dash-units-count">Loading units...</p>
+        <button class="btn btn-white" onclick="startTest(null)" id="start-btn">Start Full Mock Test →</button>
+      </div>
+      <div class="stat-grid">
+        <div class="stat-card" style="background:#eef2ff;">
+          <div style="font-size:22px;font-weight:800;color:#4338ca;" id="stat-p1">–</div>
+          <div style="font-size:12px;color:#6b7280;margin-top:2px;">Paper I Units</div>
+        </div>
+        <div class="stat-card" style="background:#ecfdf5;">
+          <div style="font-size:22px;font-weight:800;color:#059669;" id="stat-p2">–</div>
+          <div style="font-size:12px;color:#6b7280;margin-top:2px;">Env Sci Units</div>
+        </div>
+        <div class="stat-card" style="background:#fffbeb;">
+          <div style="font-size:22px;font-weight:800;color:#d97706;" id="stat-plan">Free</div>
+          <div style="font-size:12px;color:#6b7280;margin-top:2px;">Current Plan</div>
+        </div>
+        <div class="stat-card" style="background:#ecfdf5;">
+          <div style="font-size:22px;font-weight:800;color:#059669;">✓</div>
+          <div style="font-size:12px;color:#6b7280;margin-top:2px;">DB Connected</div>
+        </div>
+      </div>
+      <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:12px;padding:16px;">
+        <p style="font-weight:700;color:#92400e;font-size:14px;margin-bottom:4px;">📚 Questions coming soon!</p>
+        <p style="color:#b45309;font-size:13px;margin:0;">Next step: AI Pipeline — automatically generates questions for all 111 topics.</p>
+      </div>
+    </div>
+
+    <!-- P1 TAB -->
+    <div id="tab-p1" style="display:none;">
+      <h3 style="font-size:16px;font-weight:700;color:#374151;margin-bottom:14px;">Paper I — 10 Units (Teaching & Research Aptitude)</h3>
+      <div id="p1-list"><p style="color:#9ca3af;padding:32px;text-align:center;">Loading...</p></div>
+    </div>
+
+    <!-- P2 TAB -->
+    <div id="tab-p2" style="display:none;">
+      <h3 style="font-size:16px;font-weight:700;color:#374151;margin-bottom:14px;">Environmental Sciences — 10 Units</h3>
+      <div id="p2-list"><p style="color:#9ca3af;padding:32px;text-align:center;">Loading...</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ EXAM ══════════════════════════════════════════════ -->
+<div id="s-exam" class="screen">
+  <nav class="nav" style="justify-content:space-between;">
+    <span style="color:#fff;font-weight:700;">Mock Test</span>
+    <span id="timer">00:00</span>
+    <span id="q-progress" style="color:#a5b4fc;font-size:13px;"></span>
+  </nav>
+  <div style="max-width:660px;margin:20px auto;padding:0 16px;">
+    <div class="qmap" id="qmap"></div>
+    <div class="card" id="q-card" style="margin-bottom:16px;">
+      <p id="q-type" style="font-size:12px;color:#9ca3af;margin-bottom:4px;"></p>
+      <div id="q-assertion" style="display:none;">
+        <div style="background:#eef2ff;border-radius:8px;padding:12px;margin-bottom:8px;" id="q-a-text"></div>
+        <div style="background:#ecfdf5;border-radius:8px;padding:12px;margin-bottom:14px;" id="q-r-text"></div>
+      </div>
+      <p id="q-text" style="font-size:15px;line-height:1.7;color:#374151;font-weight:500;margin-bottom:18px;"></p>
+      <div id="q-stmts" style="background:#f9fafb;border-radius:8px;padding:12px;margin-bottom:14px;display:none;font-size:14px;"></div>
+      <div id="q-options"></div>
+    </div>
+    <div style="display:flex;gap:10px;">
+      <button class="btn btn-ghost" id="btn-prev" onclick="qNav(-1)">← Prev</button>
+      <button class="btn btn-primary" id="btn-next" onclick="qNav(1)">Next →</button>
+      <button class="btn btn-green" id="btn-submit" onclick="submitExam()" style="display:none;">Submit ✓</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ RESULTS ════════════════════════════════════════════ -->
+<div id="s-results" class="screen">
+  <div class="center-wrap" style="background:#f9fafb;">
+    <div class="card" style="max-width:440px;width:100%;text-align:center;">
+      <div id="res-emoji" style="font-size:52px;margin-bottom:8px;"></div>
+      <h2 style="font-size:22px;font-weight:800;margin-bottom:4px;">Test Complete!</h2>
+      <div id="res-pct" style="font-size:52px;font-weight:900;margin:12px 0 4px;"></div>
+      <div id="res-grade" style="font-size:17px;font-weight:700;margin-bottom:24px;"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px;">
+        <div style="background:#ecfdf5;border-radius:12px;padding:14px;">
+          <div id="res-c" style="font-size:24px;font-weight:800;color:#059669;"></div>
+          <div style="font-size:12px;color:#059669;font-weight:600;">Correct</div>
+        </div>
+        <div style="background:#fef2f2;border-radius:12px;padding:14px;">
+          <div id="res-w" style="font-size:24px;font-weight:800;color:#dc2626;"></div>
+          <div style="font-size:12px;color:#dc2626;font-weight:600;">Wrong</div>
+        </div>
+        <div style="background:#fffbeb;border-radius:12px;padding:14px;">
+          <div id="res-s" style="font-size:24px;font-weight:800;color:#d97706;"></div>
+          <div style="font-size:12px;color:#d97706;font-weight:600;">Skipped</div>
+        </div>
+      </div>
+      <p id="res-score" style="color:#9ca3af;font-size:13px;margin-bottom:20px;"></p>
+      <button class="btn-full btn-primary" onclick="show('s-dashboard')">Back to Dashboard →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══ CONFIG ═══════════════════════════════════════════════════
+const SB = { url:"", key:"" };
+let SESSION = null;
+let ALL_UNITS = [];
+let EXAM_QS = [];
+let EXAM_ANS = {};
+let EXAM_IDX = 0;
+let TIMER_INT = null;
+let TIMER_SEC = 0;
+
+// ═══ INIT ═════════════════════════════════════════════════════
+window.onload = async () => {
+  const cfg = localStorage.getItem("sb_cfg");
+  const sess = localStorage.getItem("sb_sess");
+  if(cfg){ const c=JSON.parse(cfg); SB.url=c.url; SB.key=c.key; }
+  if(sess){ SESSION=JSON.parse(sess); }
+  if(!SB.url||!SB.key){ show("s-setup"); return; }
+  if(SESSION){ loadDashboard(); show("s-dashboard"); return; }
+  show("s-landing");
+};
+
+// ═══ SUPABASE FETCH ════════════════════════════════════════════
+async function sb(path,opts={}){
+  const{method="GET",body,token,q={}}=opts;
+  const qs=Object.keys(q).length?"?"+new URLSearchParams(q):"";
+  const url=SB.url+path+qs;
+  const h={"apikey":SB.key,"Content-Type":"application/json","Prefer":"return=representation",...(token?{Authorization:"Bearer "+token}:{})};
+  const r=await fetch(url,{method,headers:h,body:body?JSON.stringify(body):undefined});
+  const t=await r.text(); const d=t?JSON.parse(t):{};
+  if(!r.ok) throw new Error(d.error_description||d.message||d.msg||"Error "+r.status);
+  return d;
+}
+async function sbLogin(email,pw){
+  const r=await fetch(SB.url+"/auth/v1/token?grant_type=password",{method:"POST",headers:{"apikey":SB.key,"Content-Type":"application/json"},body:JSON.stringify({email,password:pw})});
+  const d=await r.json(); if(!r.ok) throw new Error(d.error_description||d.msg||"Invalid email or password"); return d;
+}
+
+// ═══ NAVIGATION ════════════════════════════════════════════════
+function show(id){ document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active")); document.getElementById(id).classList.add("active"); window.scrollTo(0,0); }
+
+// ═══ SETUP ════════════════════════════════════════════════════
+async function saveConfig(){
+  const url=document.getElementById("cfg-url").value.trim().replace(/\/$/,"");
+  const key=document.getElementById("cfg-key").value.trim();
+  const errEl=document.getElementById("setup-err");
+  errEl.style.display="none";
+  if(!url||!key){errEl.textContent="Both fields required";errEl.style.display="block";return;}
+  SB.url=url; SB.key=key;
+  try{
+    await sb("/rest/v1/subjects",{q:{select:"id",limit:"1"}});
+    localStorage.setItem("sb_cfg",JSON.stringify({url,key}));
+    show("s-landing");
+  }catch(e){ errEl.textContent="Connection failed: "+e.message; errEl.style.display="block"; SB.url=""; SB.key=""; }
+}
+
+// ═══ AUTH ══════════════════════════════════════════════════════
+async function doLogin(){
+  const email=document.getElementById("login-email").value.trim();
+  const pw=document.getElementById("login-pw").value;
+  const errEl=document.getElementById("login-err");
+  const btn=document.getElementById("login-btn");
+  errEl.style.display="none";
+  if(!email||!pw){errEl.textContent="Email and password required";errEl.style.display="block";return;}
+  btn.innerHTML='<span class="spin"></span>Logging in...'; btn.disabled=true;
+  try{
+    const d=await sbLogin(email,pw);
+    SESSION={access_token:d.access_token,refresh_token:d.refresh_token,user:d.user,email:d.user.email};
+    localStorage.setItem("sb_sess",JSON.stringify(SESSION));
+    loadDashboard(); show("s-dashboard");
+  }catch(e){errEl.textContent=e.message;errEl.style.display="block";}
+  btn.innerHTML="Login →"; btn.disabled=false;
+}
+
+async function doRegister(){
+  const name=document.getElementById("reg-name").value.trim();
+  const email=document.getElementById("reg-email").value.trim();
+  const pw=document.getElementById("reg-pw").value;
+  const inst=document.getElementById("reg-inst").value.trim();
+  const dist=document.getElementById("reg-dist").value.trim();
+  const errEl=document.getElementById("reg-err");
+  const okEl=document.getElementById("reg-ok");
+  const btn=document.getElementById("reg-btn");
+  errEl.style.display="none"; okEl.style.display="none";
+  if(!name||!email||!pw){errEl.textContent="Name, email and password required";errEl.style.display="block";return;}
+  if(pw.length<6){errEl.textContent="Password must be at least 6 characters";errEl.style.display="block";return;}
+  btn.innerHTML='<span class="spin"></span>Creating...'; btn.disabled=true;
+  try{
+    const d=await sb("/auth/v1/signup",{method:"POST",body:{email,password:pw}});
+    if(!d.access_token){okEl.textContent="✅ Account created! Please verify your email then login.";okEl.style.display="block";btn.innerHTML="Register →";btn.disabled=false;return;}
+    try{ await sb("/rest/v1/users",{method:"POST",token:d.access_token,body:{id:d.user.id,email,full_name:name,institution:inst||null,district:dist||null,tier:"free"}}); }catch(e2){}
+    SESSION={access_token:d.access_token,refresh_token:d.refresh_token,user:d.user,email:d.user.email};
+    localStorage.setItem("sb_sess",JSON.stringify(SESSION));
+    loadDashboard(); show("s-dashboard");
+  }catch(e){errEl.textContent=e.message;errEl.style.display="block";}
+  btn.innerHTML="Register →"; btn.disabled=false;
+}
+
+function doLogout(){
+  SESSION=null; localStorage.removeItem("sb_sess");
+  ALL_UNITS=[]; show("s-landing");
+}
+
+// ═══ DASHBOARD ═════════════════════════════════════════════════
+async function loadDashboard(){
+  document.getElementById("dash-email").textContent=SESSION?.email||"";
+  try{
+    const u=await sb("/rest/v1/units",{token:SESSION.access_token,q:{select:"*,subjects(code,name)",is_active:"eq.true",order:"sort_order"}});
+    ALL_UNITS=Array.isArray(u)?u:[];
+    const p1=ALL_UNITS.filter(x=>x.subjects?.code==="PAPER1");
+    const p2=ALL_UNITS.filter(x=>x.subjects?.code==="ENVSC");
+    document.getElementById("stat-p1").textContent=p1.length;
+    document.getElementById("stat-p2").textContent=p2.length;
+    document.getElementById("dash-units-count").textContent=`${p1.length+p2.length} units ready · Paper I + Environmental Sciences`;
+    renderUnitList("p1-list",p1,"#4338ca","#eef2ff");
+    renderUnitList("p2-list",p2,"#059669","#ecfdf5");
+    // Check subscription
+    const s=await sb("/rest/v1/subscriptions",{token:SESSION.access_token,q:{select:"*,plans(name)",user_id:"eq."+SESSION.user.id,is_active:"eq.true"}});
+    if(Array.isArray(s)&&s.length){
+      const planName=s[0].plans?.name||"Paid";
+      document.getElementById("stat-plan").textContent=planName;
+      document.getElementById("dash-plan").textContent="✓ "+planName;
+      document.getElementById("dash-plan").style.background="#ecfdf5";
+      document.getElementById("dash-plan").style.color="#059669";
+    } else {
+      document.getElementById("dash-plan").textContent="Free Plan";
+      document.getElementById("stat-plan").textContent="Free";
+    }
+  }catch(e){ console.error(e); }
+}
+
+function renderUnitList(containerId,units,color,bg){
+  const el=document.getElementById(containerId);
+  if(!units.length){el.innerHTML='<p style="color:#9ca3af;padding:24px;text-align:center;">No units found</p>';return;}
+  el.innerHTML=units.map((u,i)=>`
+    <div class="unit-row">
+      <div style="flex:1;">
+        <span class="unit-badge" style="color:${color};">Unit ${i+1}</span>
+        <span style="font-size:14px;font-weight:600;color:#374151;">${u.name}</span>
+      </div>
+      <button class="btn" style="background:${bg};color:${color};padding:7px 14px;font-size:13px;" onclick="startTest('${u.id}')">Practice →</button>
+    </div>`).join("");
+}
+
+function dashTab(name,el){
+  ["home","p1","p2"].forEach(t=>{ document.getElementById("tab-"+t).style.display="none"; });
+  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+  document.getElementById("tab-"+name).style.display="block";
+  el.classList.add("active");
+}
+
+// ═══ EXAM ══════════════════════════════════════════════════════
+async function startTest(unitId){
+  document.getElementById("start-btn").textContent="Loading...";
+  try{
+    const q={select:"id,q_type,difficulty,question_text,correct_answer,explanation,assertion_text,reason_text,statements,column_a,column_b",is_active:"eq.true",limit:"10"};
+    if(unitId) q["unit_id"]="eq."+unitId;
+    const qs=await sb("/rest/v1/questions",{token:SESSION.access_token,q});
+    const arr=Array.isArray(qs)?qs:[];
+    if(!arr.length){alert("Questions not added yet!\n\nNext step: AI Pipeline — automatic question generation pannuvom.");document.getElementById("start-btn").textContent="Start Full Mock Test →";return;}
+    const ids=arr.map(x=>x.id);
+    const opts=await sb("/rest/v1/question_options",{token:SESSION.access_token,q:{select:"*",question_id:"in.("+ids.join(",")+")",order:"sort_order"}});
+    const optsArr=Array.isArray(opts)?opts:[];
+    EXAM_QS=arr.map(q=>({...q,options:optsArr.filter(o=>o.question_id===q.id)}));
+    EXAM_ANS={}; EXAM_IDX=0;
+    renderExam();
+    startTimer(EXAM_QS.length*72);
+    show("s-exam");
+  }catch(e){alert("Error: "+e.message);}
+  document.getElementById("start-btn").textContent="Start Full Mock Test →";
+}
+
+function renderExam(){
+  const q=EXAM_QS[EXAM_IDX];
+  document.getElementById("q-progress").textContent=(EXAM_IDX+1)+"/"+EXAM_QS.length;
+  // Qmap
+  document.getElementById("qmap").innerHTML=EXAM_QS.map((_,i)=>`<div class="qnum ${i===EXAM_IDX?"current":EXAM_ANS[EXAM_QS[i].id]?"answered":""}" onclick="goQ(${i})">${i+1}</div>`).join("");
+  // Question
+  const type=(q.q_type||"mcq").replace(/_/g," ");
+  document.getElementById("q-type").textContent=type.charAt(0).toUpperCase()+type.slice(1);
+  const isAR=q.q_type==="assertion_reason";
+  document.getElementById("q-assertion").style.display=isAR?"block":"none";
+  document.getElementById("q-text").style.display=isAR?"none":"block";
+  if(isAR){
+    document.getElementById("q-a-text").innerHTML="<b style='color:#4338ca'>Assertion (A): </b>"+q.assertion_text;
+    document.getElementById("q-r-text").innerHTML="<b style='color:#059669'>Reason (R): </b>"+q.reason_text;
+  } else {
+    document.getElementById("q-text").textContent=q.question_text;
+  }
+  // Statements
+  const stmtsEl=document.getElementById("q-stmts");
+  if(q.q_type==="statement_correct"&&Array.isArray(q.statements)){
+    stmtsEl.style.display="block";
+    stmtsEl.innerHTML=q.statements.map((s,i)=>`<p style="margin:0 0 6px;"><b>${s.no||i+1}.</b> ${s.text||s}</p>`).join("");
+  } else { stmtsEl.style.display="none"; }
+  // Options
+  const sel=EXAM_ANS[q.id];
+  document.getElementById("q-options").innerHTML=q.options.map(o=>`<div class="option ${sel===o.option_key?"selected":""}" onclick="selectOpt('${q.id}','${o.option_key}')"><b style="color:#4338ca">${o.option_key}. </b>${o.option_text}</div>`).join("");
+  // Nav buttons
+  document.getElementById("btn-prev").style.opacity=EXAM_IDX===0?".4":"1";
+  document.getElementById("btn-prev").disabled=EXAM_IDX===0;
+  const isLast=EXAM_IDX===EXAM_QS.length-1;
+  document.getElementById("btn-next").style.display=isLast?"none":"inline-block";
+  document.getElementById("btn-submit").style.display=isLast?"inline-block":"none";
+}
+
+function selectOpt(qid,key){ EXAM_ANS[qid]=key; renderExam(); }
+function goQ(i){ EXAM_IDX=i; renderExam(); }
+function qNav(dir){ EXAM_IDX=Math.max(0,Math.min(EXAM_QS.length-1,EXAM_IDX+dir)); renderExam(); }
+
+function startTimer(secs){
+  if(TIMER_INT) clearInterval(TIMER_INT);
+  TIMER_SEC=secs;
+  const el=document.getElementById("timer");
+  const tick=()=>{ TIMER_SEC--; if(TIMER_SEC<=0){clearInterval(TIMER_INT);submitExam();return;} const m=String(Math.floor(TIMER_SEC/60)).padStart(2,"0");const s=String(TIMER_SEC%60).padStart(2,"0"); el.textContent=m+":"+s; el.className=TIMER_SEC<60?"red":""; };
+  TIMER_INT=setInterval(tick,1000); tick();
+}
+
+async function submitExam(){
+  if(TIMER_INT){clearInterval(TIMER_INT);TIMER_INT=null;}
+  let c=0,w=0,s=0;
+  EXAM_QS.forEach(q=>{ const a=EXAM_ANS[q.id]; if(!a)s++; else if(a===q.correct_answer)c++; else w++; });
+  const pct=Math.round(c/EXAM_QS.length*100);
+  const pass=pct>=60;
+  document.getElementById("res-emoji").textContent=pass?"🎉":"📚";
+  document.getElementById("res-pct").textContent=pct+"%";
+  document.getElementById("res-pct").style.color=pass?"#059669":"#dc2626";
+  document.getElementById("res-grade").textContent=pass?"Pass — Great work!":"Keep practicing!";
+  document.getElementById("res-grade").style.color=pass?"#059669":"#dc2626";
+  document.getElementById("res-c").textContent=c;
+  document.getElementById("res-w").textContent=w;
+  document.getElementById("res-s").textContent=s;
+  document.getElementById("res-score").textContent="Score: "+c*2+"/"+EXAM_QS.length*2+" marks · 2 marks each · No negative marking";
+  // Save to DB
+  try{
+    await sb("/rest/v1/test_sessions",{method:"POST",token:SESSION.access_token,body:{
+      user_id:SESSION.user.id,question_ids:EXAM_QS.map(q=>q.id),
+      total_questions:EXAM_QS.length,attempted:c+w,correct:c,wrong:w,skipped:s,
+      score:c*2,max_score:EXAM_QS.length*2,percentage:pct,
+      status:"submitted",submitted_at:new Date().toISOString()
+    }});
+  }catch(e){}
+  show("s-results");
+}
+</script>
+</body>
+</html>
